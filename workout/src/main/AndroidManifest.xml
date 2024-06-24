@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MultiApplicationProject">
         <activity
-            android:name=".Activity_panel"
+            android:name=".Activity_Panel"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

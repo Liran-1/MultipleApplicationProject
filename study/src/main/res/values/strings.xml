@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">MultiApplicationProject</string>
+    <string name="app_name">Time Your Study</string>
+    <string name="FirstStartStudy">Let\'s start Studying!</string>
+    <string name="PauseStudy">Why did you stop? Lets finish the study session!</string>
+    <string name="StopStudy">It\'s a shame to stop your study session like that. But you can start over again if you want!</string>
 </resources>
