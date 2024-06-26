@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_RLO_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,12 +11,16 @@
         android:id="@+id/main_TXT_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="3"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="80sp"
-        android:text="title_string"
-        android:textSize="48sp" />
+        android:layout_marginEnd="28dp"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
+        android:text="@string/title_string"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_TXT_timer"
@@ -24,56 +29,64 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
         android:text="@string/timer_default"
+        android:textColor="@color/black"
         android:textSize="68sp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/main_ETXT_userTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/main_LLO_buttons"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:layout_above="@id/main_LLO_buttons"
-        android:hint="Enter countdown time"
+        android:hint="@string/enter_countdown_time"
+        android:inputType="number"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <LinearLayout
         android:id="@+id/main_LLO_buttons"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        >
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_BTN_start"
-            android:layout_weight="1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:text="Start"
             android:layout_marginBottom="80dp"
+            android:layout_weight="1"
+            android:text="@string/start"
+            android:textSize="20sp"
+            android:translationZ="8dp"
             app:icon="@drawable/caret_circle_right" />
 
         <com.google.android.material.button.MaterialButton
-            android:layout_weight="1"
             android:id="@+id/main_BTN_pause"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:text="pause"
             android:layout_marginBottom="80dp"
-            app:icon="@drawable/pause_circle"
-            />
+            android:layout_weight="1"
+            android:text="@string/pause"
+            android:textSize="20sp"
+            android:translationZ="8dp"
+            app:icon="@drawable/pause_circle" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_BTN_stop"
-            android:layout_weight="1"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginBottom="80dp"
-            android:src="@drawable/stop_circle" />
+            android:layout_weight="1"
+            android:text="@string/stop"
+            android:textSize="20sp"
+            android:translationZ="8dp"
+            app:icon="@drawable/stop_circle" />
 
     </LinearLayout>
 
