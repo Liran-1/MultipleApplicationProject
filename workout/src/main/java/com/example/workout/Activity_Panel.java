@@ -1,17 +1,22 @@
 package com.example.workout;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.example.common.Activity_Main;
 
 public class Activity_Panel extends Activity_Main {
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.main_RLO_activity.setBackground(getDrawable(R.drawable.sports_background));
+        initView();
+    }
+
+    private void initView() {
+        super.main_TXT_title.setText(R.string.FirstStartWorkout);
+        this.main_RLO_activity.setBackground(AppCompatResources.getDrawable(this, R.drawable.sports_background));
     }
 
 
@@ -34,7 +39,13 @@ public class Activity_Panel extends Activity_Main {
     }
 
     @Override
-    public void updateTimer(String currentTIme) {
-
+    public void updateTimer(String currentTIme, double percentagePassed) {
+        main_TXT_timer.setText(currentTIme);
+        if (percentagePassed < super.DOUBLE_30_PERCENT) {
+            main_TXT_title.setText(R.string.FirstStartWorkout);
+        }
+        super.updateTimer(currentTIme, percentagePassed);
     }
+
+
 }

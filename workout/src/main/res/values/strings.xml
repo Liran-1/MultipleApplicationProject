@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">workout</string>
+    <string name="app_name">Time Your Workout</string>
     <string name="FirstStartWorkout">Let\'s start our workout!</string>
     <string name="PauseWorkout">Why did you stop? Lets finish the exercise!</string>
     <string name="StopWorkout">It\'s a shame to stop your workout like that. But you can start over again if you want!</string>

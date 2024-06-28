@@ -7,21 +7,18 @@ import java.util.concurrent.TimeUnit;
 
 public class TimerManager {
 
-    private long timePassed = 0;
-    private boolean timerRunning = false, timerPaused = false, timerStopped = false, didTimerStart = false, didTimerFinish = false;
+    private long timePassed;
+    private boolean timerRunning = false, timerPaused = false, timerStopped = false, didTimerStart = false;
 
     private CountDownTimer countDownTimer;
     private String timerTimeStr;
-    private int defaultMinutes = 10;
+    public static final int DEFAULT_MINUTES = 10;
 
     public TimerCallback timerCallback;
-
-    public int getDefaultMinutes() {
-        return defaultMinutes;
-    }
+    public static final int MAX_MINUTES = 60;
 
     public interface TimerCallback {
-        void updateTimer(String currentTIme);
+        void updateTimer(String currentTIme, double percentagePassed);
     }
 
 //    public void setTimerCallback(TimerCallback timerCallback) {
@@ -34,6 +31,15 @@ public class TimerManager {
     }
 
     public TimerManager() {
+    }
+
+
+    public long getTimePassed() {
+        return timePassed;
+    }
+
+    public void setTimePassed(long timePassed) {
+        this.timePassed = timePassed;
     }
 
     public void startTimer(int timerMinutesFromInput) {
@@ -67,19 +73,16 @@ public class TimerManager {
         countDownTimer.cancel();
     }
 
-    public String getTimerTimeStr() {
-        return timerTimeStr;
-    }
-
     public void startCountDownTimer() {
         countDownTimer.start();
     }
 
     public void runTimer(int timerMinutesFromInput) {
-        int minutes = timerMinutesFromInput;            //GET FROM INPUT!!!
-        long timerDuration = (TimeUnit.MINUTES.toMillis(minutes) - timePassed), ticksInterval = 5;
+        long inputToMillis = TimeUnit.MINUTES.toMillis(timerMinutesFromInput);
+        long timerDuration = (inputToMillis - timePassed), ticksInterval = 5;
         countDownTimer = new CountDownTimer(timerDuration, ticksInterval) {
             long millis = 1000;
+            double percentagePassed;
             final String timerTimeFormat = "%02d:%02d:%02d";
 
             @Override
@@ -96,8 +99,9 @@ public class TimerManager {
 
                 timerTimeStr = String.format(Locale.getDefault(), timerTimeFormat,
                         timerMinutes, timerSeconds, millis);
-                timePassed = TimeUnit.MINUTES.toMillis(minutes) - millisUntilFinished;
-                timerCallback.updateTimer(timerTimeStr);
+                timePassed = TimerManager.getTimePassed(timerMinutesFromInput, millisUntilFinished);
+                percentagePassed = getPercentagePassed(inputToMillis);
+                timerCallback.updateTimer(timerTimeStr, percentagePassed);
             }
 
             @Override
@@ -105,29 +109,20 @@ public class TimerManager {
                 int zero = 0;
                 timerTimeStr = String.format(Locale.getDefault(), timerTimeFormat,
                         zero, zero, zero);
-                timerCallback.updateTimer(timerTimeStr);
+                percentagePassed = 1;
+                timerCallback.updateTimer(timerTimeStr, percentagePassed);
             }
         }.start();
 
     }
 
-    public boolean isTimerRunning() {
-        return timerRunning;
+    private static long getTimePassed(int timerMinutesFromInput, long millisUntilFinished) {
+        return TimeUnit.MINUTES.toMillis(timerMinutesFromInput) - millisUntilFinished;
     }
 
-    public boolean isTimerPaused() {
-        return timerPaused;
+    private double getPercentagePassed(long inputToMills) {
+        return (double) timePassed / inputToMills;
     }
 
-    public boolean isTimerStopped() {
-        return timerStopped;
-    }
 
-    public boolean isDidTimerStart() {
-        return didTimerStart;
-    }
-
-    public boolean isDidTimerFinish() {
-        return didTimerFinish;
-    }
 }
